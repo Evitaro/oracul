@@ -1,59 +1,75 @@
 <p align="center">
   <br>
-  <img width="240" src="./assets/tapps.png" alt="logo of telegram web apps">
+  <img width="240" src="./assets/mystic-eye.png" alt="Мистический глаз">
   <br>
   <br>
 </p>
 
-# Telegram Mini Apps Basic Example
-This is a basic and straightforward Telegram Mini App(TMA) implemented using plain JavaScript, HTML, and CSS. This project aims to provide a minimalistic example of how to create a simple TWA and launch it within Telegram without relying on complex build tools or bleeding-edge libraries.
+# Мистический совет дня 🔮
 
-- App is available via direct link: https://t.me/simple_telegram_mini_app_bot/app
-- Or you can launch app with a bot menu button: https://t.me/simple_telegram_mini_app_bot
-- Deployment URL: [https://twa-dev.github.io/simple-telegram-web-app/](https://telegram-mini-apps-dev.github.io/vanilla-js-boilerplate/)
+Это Telegram Mini App, которое генерирует персонализированные мистические советы с использованием искусственного интеллекта. Приложение создано с использованием чистого JavaScript, HTML и CSS, без использования сложных фреймворков и библиотек.
 
-## Features
-- Minimalistic user interface.
-- No external libraries or frameworks used.
-- Easy to understand and modify.
+## 🌟 Особенности
 
-## Getting Started
+- Персонализированные мистические советы
+- Красивый анимированный интерфейс
+- Интеграция с моделью Hugging Face для генерации текста
+- Адаптивный дизайн
+- Мгновенный отклик и плавные анимации
 
-### Prerequisites
+## 🚀 Начало работы
 
-To run this example, you'll need a modern web browser with JavaScript enabled.
+### Предварительные требования
 
-### Installation
+- Современный веб-браузер
+- API ключ от Hugging Face (для генерации советов)
 
-1. Clone this repository to your local machine:
+### Установка
 
+1. Клонируйте репозиторий:
    ```bash
-   git clone https://github.com/Telegram-Mini-Apps-Dev/vanilla-js-boilerplate
+   git clone https://github.com/Evitaro/oracul.git
+   ```
 
-2. Navigate to the project directory:
+2. Перейдите в директорию проекта:
+   ```bash
+   cd oracul
+   ```
 
-	```bash
-	cd vanilla-js-boilerplate
+3. Откройте `index.html` в вашем браузере или разверните на веб-сервере.
 
-Open index.html in your preferred code editor or IDE.
+### ⚙️ Настройка
 
-### Usage
-1. Open index.html in your preferred code editor or IDE.
-2. Make your changes
-3. Create your own GitHub repository, commit and push your updates.
-4. Go to your repository GitHub page and open Settings. Check the Pages tab and Build and deployment section. If GitHub Actions option was selected, assets should be deployed to Pages and there will be an URL like `https://<username>.github.io/simple-telegram-mini-app/`. You can copy this URL and use it with [BotFather](https://tg.me/BotFather) bot to create your very own TWA.
+1. Получите API ключ на [Hugging Face](https://huggingface.co/)
+2. Замените placeholder `"Bearer hf_xxx"` в `index.html` на ваш API ключ
 
-### Customization
-Feel free to customize this web app to suit your needs. You can modify the HTML, CSS, and JavaScript files as required.
+## 🎨 Кастомизация
 
-## Contributing
-If you'd like to contribute to this project, please follow these steps:
+Вы можете настроить приложение под свои нужды:
 
-1. Fork the repository.
-2. Create a new branch for your feature or bug fix.
-3. Make your changes and commit them with descriptive messages.
-4. Push your branch to your fork.
-5. Create a pull request to the main repository's main branch.
+- Измените список мистических вступлений в массиве `mysticalIntros`
+- Настройте визуальный стиль через CSS
+- Модифицируйте промпт для генерации советов
 
-## License
-This project is licensed under the MIT License - see the LICENSE file for details.
+## 📱 Использование в Telegram
+
+1. Разверните приложение на GitHub Pages или другом хостинге
+2. Создайте бота через [BotFather](https://t.me/BotFather)
+3. Настройте Web App URL в настройках бота
+
+## 📄 Лицензия
+
+Этот проект лицензирован под MIT License - см. файл [LICENSE](LICENSE) для деталей.
+
+## 🤝 Вклад в проект
+
+Мы приветствуем ваш вклад в развитие проекта! Если вы хотите помочь:
+
+1. Форкните репозиторий
+2. Создайте ветку для ваших изменений
+3. Внесите изменения и закоммитьте их
+4. Отправьте пулл реквест
+
+## ⚠️ Важное замечание
+
+Не забудьте защитить свой API ключ при развертывании приложения. Рекомендуется использовать переменные окружения или другие безопасные методы хранения ключей.
