@@ -1,249 +1,305 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <title>Подсказка от Вселенной для...</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-    <script src="https://telegram.org/js/telegram-web-app.js"></script>
-    <style>
-        body {
-            background: #0a0a1a;
-            color: #e0e0ff;
-            font-family: 'Philosopher', sans-serif;
-            margin: 0;
-            padding: 0;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background-image: 
-                radial-gradient(circle at 50% 50%, rgba(41, 98, 255, 0.1) 0%, transparent 60%),
-                radial-gradient(circle at 85% 15%, rgba(255, 41, 41, 0.1) 0%, transparent 55%),
-                radial-gradient(circle at 15% 85%, rgba(255, 216, 41, 0.1) 0%, transparent 55%);
-        }
+    <head>
+        <meta charset="utf-8" />
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"
+        />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Подсказка от Вселенной для...</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Philosopher:ital,wght@0,400;0,700;1,400&display=swap"
+            rel="stylesheet"
+        />
+        <script src="https://telegram.org/js/telegram-web-app.js"></script>
+        <style>
+            body {
+                background: #0a0a1a;
+                color: #e0e0ff;
+                font-family: "Philosopher", sans-serif;
+                margin: 0;
+                padding: 0;
+                min-height: 100vh;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background-image:
+                    radial-gradient(
+                        circle at 50% 50%,
+                        rgba(41, 98, 255, 0.1) 0%,
+                        transparent 60%
+                    ),
+                    radial-gradient(
+                        circle at 85% 15%,
+                        rgba(255, 41, 41, 0.1) 0%,
+                        transparent 55%
+                    ),
+                    radial-gradient(
+                        circle at 15% 85%,
+                        rgba(255, 216, 41, 0.1) 0%,
+                        transparent 55%
+                    );
+            }
 
-        .container {
-            width: 90%;
-            max-width: 600px;
-            margin: 2rem auto;
-            padding: 2rem;
-            position: relative;
-            background: rgba(10, 10, 26, 0.8);
-            border-radius: 20px;
-            box-shadow: 0 0 40px rgba(41, 98, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
+            .container {
+                width: 90%;
+                max-width: 600px;
+                margin: 2rem auto;
+                padding: 2rem;
+                position: relative;
+                background: rgba(10, 10, 26, 0.8);
+                border-radius: 20px;
+                box-shadow: 0 0 40px rgba(41, 98, 255, 0.1);
+                backdrop-filter: blur(10px);
+            }
 
-        .mystic-eye {
-            width: 200px;
-            height: 200px;
-            margin: 0 auto 2rem;
-            display: block;
-            animation: glow 4s infinite alternate;
-        }
+            .mystic-eye {
+                width: 200px;
+                height: 200px;
+                margin: 0 auto 2rem;
+                display: block;
+                animation: glow 4s infinite alternate;
+            }
 
-        @keyframes glow {
-            0% { filter: drop-shadow(0 0 5px rgba(41, 98, 255, 0.5)); }
-            50% { filter: drop-shadow(0 0 20px rgba(255, 41, 41, 0.5)); }
-            100% { filter: drop-shadow(0 0 5px rgba(255, 216, 41, 0.5)); }
-        }
+            @keyframes glow {
+                0% {
+                    filter: drop-shadow(0 0 5px rgba(41, 98, 255, 0.5));
+                }
+                50% {
+                    filter: drop-shadow(0 0 20px rgba(255, 41, 41, 0.5));
+                }
+                100% {
+                    filter: drop-shadow(0 0 5px rgba(255, 216, 41, 0.5));
+                }
+            }
 
-        h1 {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            color: #fff;
-            text-shadow: 0 0 10px rgba(41, 98, 255, 0.5);
-        }
+            h1 {
+                text-align: center;
+                font-size: 2.5rem;
+                margin-bottom: 2rem;
+                color: #fff;
+                text-shadow: 0 0 10px rgba(41, 98, 255, 0.5);
+            }
 
-        .form-group {
-            margin-bottom: 2rem;
-        }
+            .form-group {
+                margin-bottom: 2rem;
+            }
 
-        input[type="text"] {
-            width: 100%;
-            padding: 1rem;
-            border: 2px solid rgba(41, 98, 255, 0.3);
-            background: rgba(10, 10, 26, 0.5);
-            color: #fff;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            font-family: 'Philosopher', sans-serif;
-            transition: all 0.3s ease;
-        }
+            input[type="text"] {
+                width: 100%;
+                padding: 1rem;
+                border: 2px solid rgba(41, 98, 255, 0.3);
+                background: rgba(10, 10, 26, 0.5);
+                color: #fff;
+                border-radius: 10px;
+                font-size: 1.2rem;
+                font-family: "Philosopher", sans-serif;
+                transition: all 0.3s ease;
+            }
 
-        input[type="text"]:focus {
-            outline: none;
-            border-color: rgba(41, 98, 255, 0.8);
-            box-shadow: 0 0 15px rgba(41, 98, 255, 0.3);
-        }
+            input[type="text"]:focus {
+                outline: none;
+                border-color: rgba(41, 98, 255, 0.8);
+                box-shadow: 0 0 15px rgba(41, 98, 255, 0.3);
+            }
 
-        button {
-            width: 100%;
-            padding: 1rem;
-            background: linear-gradient(45deg, #2962ff, #ff2929);
-            border: none;
-            color: #fff;
-            border-radius: 10px;
-            font-size: 1.2rem;
-            font-family: 'Philosopher', sans-serif;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            position: relative;
-            overflow: hidden;
-        }
+            button {
+                width: 100%;
+                padding: 1rem;
+                background: linear-gradient(45deg, #2962ff, #ff2929);
+                border: none;
+                color: #fff;
+                border-radius: 10px;
+                font-size: 1.2rem;
+                font-family: "Philosopher", sans-serif;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                position: relative;
+                overflow: hidden;
+            }
 
-        button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 20px rgba(41, 98, 255, 0.3);
-        }
+            button:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 5px 20px rgba(41, 98, 255, 0.3);
+            }
 
-        button:active {
-            transform: translateY(0);
-        }
+            button:active {
+                transform: translateY(0);
+            }
 
-        .loading {
-            text-align: center;
-            display: none;
-            color: #2962ff;
-            font-style: italic;
-            margin: 1rem 0;
-        }
+            .loading {
+                text-align: center;
+                display: none;
+                color: #2962ff;
+                font-style: italic;
+                margin: 1rem 0;
+            }
 
-        .advice-container {
-            margin-top: 2rem;
-            padding: 2rem;
-            border-radius: 15px;
-            background: rgba(41, 98, 255, 0.1);
-            border: 1px solid rgba(41, 98, 255, 0.2);
-            font-size: 1.2rem;
-            line-height: 1.6;
-            position: relative;
-            overflow: hidden;
-        }
+            .advice-container {
+                margin-top: 2rem;
+                padding: 2rem;
+                border-radius: 15px;
+                background: rgba(41, 98, 255, 0.1);
+                border: 1px solid rgba(41, 98, 255, 0.2);
+                font-size: 1.2rem;
+                line-height: 1.6;
+                position: relative;
+                overflow: hidden;
+            }
 
-        .advice-container:before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle at center, rgba(41, 98, 255, 0.1) 0%, transparent 70%);
-            animation: rotate 10s linear infinite;
-            pointer-events: none;
-        }
+            .advice-container:before {
+                content: "";
+                position: absolute;
+                top: -50%;
+                left: -50%;
+                width: 200%;
+                height: 200%;
+                background: radial-gradient(
+                    circle at center,
+                    rgba(41, 98, 255, 0.1) 0%,
+                    transparent 70%
+                );
+                animation: rotate 10s linear infinite;
+                pointer-events: none;
+            }
 
-        @keyframes rotate {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <img src="./assets/mystic-eye.png" alt="Мистический глаз" class="mystic-eye">
-        <h1>Подсказка от Вселенной для...</h1>
-        <div class="form-group">
-            <input type="text" id="nameInput" placeholder="Введите ваше имя..." />
+            @keyframes rotate {
+                from {
+                    transform: rotate(0deg);
+                }
+                to {
+                    transform: rotate(360deg);
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+            <img
+                src="./assets/mystic-eye.png"
+                alt="Мистический глаз"
+                class="mystic-eye"
+            />
+            <h1>Подсказка от Вселенной для...</h1>
+            <div class="form-group">
+                <input
+                    type="text"
+                    id="nameInput"
+                    placeholder="Введите ваше имя..."
+                />
+            </div>
+            <button onclick="getAdvice()">Получить предсказание</button>
+            <div class="loading" id="loading">
+                Соединяемся с космической мудростью...
+            </div>
+            <div class="advice-container" id="adviceContainer"></div>
         </div>
-        <button onclick="getAdvice()">Получить предсказание</button>
-        <div class="loading" id="loading">Соединяемся с космической мудростью...</div>
-        <div class="advice-container" id="adviceContainer"></div>
-    </div>
 
-    <script>
-        let tg = window.Telegram.WebApp;
-        
-        // Инициализация Telegram Web App
-        window.onload = function() {
-            tg.expand();
-            
-            // Получаем данные пользователя
-            const user = tg.initDataUnsafe.user;
-            const nameInput = document.getElementById('nameInput');
-            
-            // Если есть данные пользователя, заполняем поле имени
-            if (user) {
-                const fullName = user.first_name + (user.last_name ? ' ' + user.last_name : '');
-                nameInput.value = fullName;
+        <script>
+            let tg = window.Telegram.WebApp;
+
+            // Инициализация Telegram Web App
+            window.onload = function () {
+                tg.expand();
+
+                // Получаем данные пользователя
+                const user = tg.initDataUnsafe.user;
+                const nameInput = document.getElementById("nameInput");
+
+                // Если есть данные пользователя, заполняем поле имени
+                if (user) {
+                    const fullName =
+                        user.first_name +
+                        (user.last_name ? " " + user.last_name : "");
+                    nameInput.value = fullName;
+                }
+            };
+
+            async function getAdvice() {
+                const nameInput = document.getElementById("nameInput");
+                const adviceContainer =
+                    document.getElementById("adviceContainer");
+                const loading = document.getElementById("loading");
+
+                if (!nameInput.value) {
+                    alert("Пожалуйста, представьтесь нам...");
+                    return;
+                }
+
+                loading.style.display = "block";
+                adviceContainer.innerHTML = "";
+                adviceContainer.style.opacity = "0";
+
+                try {
+                    // Получаем мистический совет на английском
+                    const adviceResponse = await fetch(
+                        "https://api.adviceslip.com/advice",
+                    );
+                    const adviceData = await adviceResponse.json();
+                    const englishAdvice = adviceData.slip.advice;
+
+                    // Переводим на русский
+                    const translateResponse = await fetch(
+                        `https://api.mymemory.translated.net/get?q=${encodeURIComponent(englishAdvice)}&langpair=en|ru`,
+                    );
+                    const translateData = await translateResponse.json();
+                    const russianAdvice =
+                        translateData.responseData.translatedText;
+
+                    // Добавляем мистическое обращение
+                    const mysticalIntros = [
+                        "🌟 Звезды говорят",
+                        "✨ Космические силы шепчут",
+                        "🔮 Кристальный шар открывает",
+                        "🌙 Лунный свет освещает путь",
+                        "⚡ Мистические энергии раскрывают",
+                        "🎆 Древние руны предвещают",
+                        "🌌 Вселенная направляет",
+                        "🔥 Пламя свечи показывает",
+                        "🌿 Мудрость веков гласит",
+                        "💫 Астральные потоки несут весть",
+                        "🌺 Цветок жизни раскрывает",
+                        "🕯️ Тайные знаки указывают",
+                        "🌊 Волны времени приносят",
+                        "⭐ Созвездия складываются",
+                        "🍃 Ветер перемен доносит",
+                    ];
+
+                    const randomIntro =
+                        mysticalIntros[
+                            Math.floor(Math.random() * mysticalIntros.length)
+                        ];
+                    const personalizedAdvice = `${randomIntro}, ${nameInput.value}:\n\n${russianAdvice}`;
+
+                    // Плавно показываем совет
+                    setTimeout(() => {
+                        adviceContainer.innerHTML = personalizedAdvice;
+                        adviceContainer.style.transition =
+                            "opacity 0.5s ease-in";
+                        adviceContainer.style.opacity = "1";
+                    }, 500);
+                } catch (error) {
+                    adviceContainer.innerHTML =
+                        "🌑 Туман будущего слишком густ... Попробуйте получить совет позже.";
+                    console.error("Error:", error);
+                } finally {
+                    loading.style.display = "none";
+                }
             }
-        }
 
-        async function getAdvice() {
-            const nameInput = document.getElementById('nameInput');
-            const adviceContainer = document.getElementById('adviceContainer');
-            const loading = document.getElementById('loading');
-            
-            if (!nameInput.value) {
-                alert('Пожалуйста, представьтесь нам...');
-                return;
-            }
-
-            loading.style.display = 'block';
-            adviceContainer.innerHTML = '';
-            adviceContainer.style.opacity = '0';
-
-            try {
-                // Получаем мистический совет на английском
-                const adviceResponse = await fetch('https://api.adviceslip.com/advice');
-                const adviceData = await adviceResponse.json();
-                const englishAdvice = adviceData.slip.advice;
-
-                // Переводим на русский
-                const translateResponse = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(englishAdvice)}&langpair=en|ru`);
-                const translateData = await translateResponse.json();
-                const russianAdvice = translateData.responseData.translatedText;
-
-                // Добавляем мистическое обращение
-                const mysticalIntros = [
-                    "🌟 Звезды говорят",
-                    "✨ Космические силы шепчут", 
-                    "🔮 Кристальный шар открывает",
-                    "🌙 Лунный свет освещает путь",
-                    "⚡ Мистические энергии раскрывают",
-                    "🎆 Древние руны предвещают",
-                    "🌌 Вселенная направляет",
-                    "🔥 Пламя свечи показывает",
-                    "🌿 Мудрость веков гласит",
-                    "💫 Астральные потоки несут весть",
-                    "🌺 Цветок жизни раскрывает",
-                    "🕯️ Тайные знаки указывают",
-                    "🌊 Волны времени приносят",
-                    "⭐ Созвездия складываются",
-                    "🍃 Ветер перемен доносит"
-                ];
-                
-                const randomIntro = mysticalIntros[Math.floor(Math.random() * mysticalIntros.length)];
-                const personalizedAdvice = `${randomIntro}, ${nameInput.value}:\n\n${russianAdvice}`;
-
-                // Плавно показываем совет
-                setTimeout(() => {
-                    adviceContainer.innerHTML = personalizedAdvice;
-                    adviceContainer.style.transition = 'opacity 0.5s ease-in';
-                    adviceContainer.style.opacity = '1';
-                }, 500);
-
-            } catch (error) {
-                adviceContainer.innerHTML = '🌑 Туман будущего слишком густ... Попробуйте получить совет позже.';
-                console.error('Error:', error);
-            } finally {
-                loading.style.display = 'none';
-            }
-        }
-
-        // Добавляем обработку клавиши Enter в поле ввода
-        document.getElementById('nameInput').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                getAdvice();
-            }
-        });
-    </script>
-</body>
+            // Добавляем обработку клавиши Enter в поле ввода
+            document
+                .getElementById("nameInput")
+                .addEventListener("keypress", function (e) {
+                    if (e.key === "Enter") {
+                        getAdvice();
+                    }
+                });
+        </script>
+    </body>
 </html>
