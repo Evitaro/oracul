@@ -236,20 +236,46 @@
                 adviceContainer.style.opacity = "0";
 
                 try {
-                    // Получаем мистический совет на английском
-                    const adviceResponse = await fetch(
-                        "https://api.adviceslip.com/advice",
-                    );
-                    const adviceData = await adviceResponse.json();
-                    const englishAdvice = adviceData.slip.advice;
+                    // Создаем массив источников советов
+                    const sources = [
+                        { name: "AdviceSlip", fn: getAdviceSlipAPI },
+                        { name: "ZenQuote", fn: getZenQuoteAPI },
+                        { name: "Affirmation", fn: getAffirmationAPI },
+                        { name: "Quotable", fn: getQuotableAPI },
+                        { name: "Ninja", fn: getNinjaAPI }
+                    ];
+
+                    // Перемешиваем массив для случайного порядка
+                    const shuffledSources = [...sources].sort(() => Math.random() - 0.5);
+                    
+                    let englishAdvice = null;
+                    let usedSource = null;
+
+                    // Пробуем каждый API по очереди, пока не получим успешный ответ
+                    for (const source of shuffledSources) {
+                        try {
+                            console.log(`Пробуем получить совет от: ${source.name}`);
+                            englishAdvice = await source.fn();
+                            if (englishAdvice) {
+                                usedSource = source.name;
+                                break;
+                            }
+                        } catch (error) {
+                            console.log(`Ошибка при получении совета от ${source.name}:`, error);
+                            continue;
+                        }
+                    }
+
+                    if (!englishAdvice) {
+                        throw new Error("Не удалось получить совет ни от одного из сервисов");
+                    }
 
                     // Переводим на русский
                     const translateResponse = await fetch(
-                        `https://api.mymemory.translated.net/get?q=${encodeURIComponent(englishAdvice)}&langpair=en|ru`,
+                        `https://api.mymemory.translated.net/get?q=${encodeURIComponent(englishAdvice)}&langpair=en|ru`
                     );
                     const translateData = await translateResponse.json();
-                    const russianAdvice =
-                        translateData.responseData.translatedText;
+                    const russianAdvice = translateData.responseData.translatedText;
 
                     // Добавляем мистическое обращение
                     const mysticalIntros = [
@@ -300,6 +326,45 @@
                         getAdvice();
                     }
                 });
+
+            async function getAdviceSlipAPI() {
+                const response = await fetch("https://api.adviceslip.com/advice");
+                if (!response.ok) throw new Error('AdviceSlip API не отвечает');
+                const data = await response.json();
+                return data.slip.advice;
+            }
+
+            async function getZenQuoteAPI() {
+                const response = await fetch("https://api.quotable.io/random");
+                if (!response.ok) throw new Error('ZenQuote API не отвечает');
+                const data = await response.json();
+                return data.content;
+            }
+
+            async function getAffirmationAPI() {
+                const response = await fetch("https://www.affirmations.dev/");
+                if (!response.ok) throw new Error('Affirmation API не отвечает');
+                const data = await response.json();
+                return data.affirmation;
+            }
+
+            async function getQuotableAPI() {
+                const response = await fetch("https://api.quotable.io/random?tags=wisdom|inspirational");
+                if (!response.ok) throw new Error('Quotable API не отвечает');
+                const data = await response.json();
+                return `${data.content} - ${data.author}`;
+            }
+
+            async function getNinjaAPI() {
+                const response = await fetch("https://api.api-ninjas.com/v1/quotes?category=success", {
+                    headers: {
+                        'X-Api-Key': 'NJdscoFvSQ238+0UlRUlbQ==pZot5GGFXTVUNhpk'
+                    }
+                });
+                if (!response.ok) throw new Error('Ninja API не отвечает');
+                const [data] = await response.json();
+                return `${data.quote} - ${data.author}`;
+            }
         </script>
     </body>
 </html>
